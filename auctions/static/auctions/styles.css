@@ -1,0 +1,86 @@
+body {
+  background-color: #f5f5f5;
+}
+.name-page{
+    font-size :40px;
+    color: yellow;
+
+}
+
+/* 居中项目 #772323好的元素 */
+.nav-item {
+    text-align: center;
+}
+
+/* 更改链接的背景颜色 */
+.nav-link {
+    background-color: #f2f2f2; /* 浅色调背景 */
+    color: #333; /* 字体颜色 */
+    font-family: 'Roboto', sans-serif; /* 使用Roboto字体 */
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.nav-link:hover {
+    background-color: #ddd; /* 悬停时的背景颜色 */
+}
+
+.i-img{
+    width: 250px;
+}
+
+.l-img{
+    width: 400px;
+}
+
+.listing-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.listing-item {
+    display: flex;
+    margin: 10px;
+    width: 100%;
+    max-width: 400px; /* 设置每个项目的最大宽度 */
+    transition: background-color 0.3s;
+}
+
+.listing-image {
+    flex: 2; /* 图片占据左侧一部分空间 */
+    margin: 15px;
+}
+
+.listing-details {
+    flex: 1; /* 文字和其他内容占据右侧更多的空间 */
+    margin: 10px;
+    border: 2px solid black;
+
+}
+
+.listing-item:hover{
+    background-color: cornsilk;
+}
+/*设定 custom-form */
+.custom-form {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+}
+
+.custom-form label {
+    font-weight: bold;
+}
+
+.custom-form input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+
+

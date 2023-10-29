@@ -1,0 +1,60 @@
+{% extends "auctions/layout.html" %}
+
+
+{% block body %}
+<!-- 所有的拍卖品的缩略图 然后你可以点进去-->
+<script>
+$(document).ready(function() {
+    {# write javascript to send messiage #}
+    $('.btn-delete-item').click(function() {
+        {#获取到循环id#}
+        var loop_id = $(this).data('looper');
+        var div_id = 'div-'+loop_id ;
+        var auction_id = $(this).siblings('input[name=listing-id]').val()
+        $.ajax({
+            type: 'POST',
+            url: '/watch_list',
+            data: {
+                'name':'btn-delete-item',
+                'auction_id': auction_id,  // 发送商品ID
+                'div_id':div_id,
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),  // 包括CSRF令牌
+            },
+            success: function(data) {
+                // data.remove() 删除对应的元素
+                alert('删除成功!')
+                console.log(data)
+                $('#'+data['div_id']).remove()
+            },
+            error: function() {
+                alert('删除失败!!')
+            }
+        });
+    });
+});
+</script>
+
+<div class='listing-container'>
+    {% for listing in auction_list %}
+        <div class="listing-item" id="div-{{ forloop.counter }}">
+            <div class="'listing-details">
+            <a href="{% url 'listing_detail' listing.pk %}">{{ listing.title }}</a></div>
+            <p>Current Price: ${{ listing.current_bid }}
+            </p>
+            <form action="/watch_list" class="custom-form">
+            <input type="hidden" name="listing-id"  value="{{ listing.pk }}  ">
+            {% csrf_token %}
+            <button type="button"  data-looper="{{ forloop.counter }}" class="btn-delete-item" style="color: red ;border: #333333;border-width: 5px; ">
+                <span style="color: honeydew">delete</span> </button>
+            </form>
+          <div class="listing-image">
+            {% if listing.image_url %}
+                <img class="i-img" src="{{ listing.image_url.url }}" alt="{{ listing.title }}">
+            {% endif %}
+        </div> </div>
+
+        <hr>
+    {% endfor %}
+</div>
+
+{% endblock %}

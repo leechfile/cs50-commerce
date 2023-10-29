@@ -1,0 +1,55 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title >{% block title %}Auctions{% endblock %}</title>
+    <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <header>
+        <a href="{% url 'index' %}" style="font-size: 40px; color: black; text-align: center">Auctions</a>
+        <div>
+            {% if user.is_authenticated %}
+                Signed in as <strong>{{ user.username }}</strong>.
+            {% else %}
+                Not signed in.
+            {% endif %}
+        </div>
+    </header>
+    <nav>
+        <ul class="nav">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'create_listing' %}">Create Listing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'watch_list' %}">Watching lists</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <hr>
+    <main>
+        {% block body %}
+        {% endblock %}
+    </main>
+</div>
+</body>
+</html>
