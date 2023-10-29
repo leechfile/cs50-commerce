@@ -38,15 +38,16 @@ $(document).ready(function() {
     {% for listing in auction_list %}
         <div class="listing-item" id="div-{{ forloop.counter }}">
             <div class="'listing-details">
-            <a href="{% url 'listing_detail' listing.pk %}">{{ listing.title }}</a></div>
+            <a class="name-page" href="{% url 'listing_detail' listing.pk %}">{{ listing.title }}</a>
             <p>Current Price: ${{ listing.current_bid }}
             </p>
-            <form action="/watch_list" class="custom-form">
+            <form action="/watch_list" style="text-align: center">
             <input type="hidden" name="listing-id"  value="{{ listing.pk }}  ">
             {% csrf_token %}
-            <button type="button"  data-looper="{{ forloop.counter }}" class="btn-delete-item" style="color: red ;border: #333333;border-width: 5px; ">
-                <span style="color: honeydew">delete</span> </button>
+            <button type="button"  data-looper="{{ forloop.counter }}" class="btn-delete-item" >
+                <span >delete</span> </button>
             </form>
+            </div>
           <div class="listing-image">
             {% if listing.image_url %}
                 <img class="i-img" src="{{ listing.image_url.url }}" alt="{{ listing.title }}">
@@ -58,3 +59,4 @@ $(document).ready(function() {
 </div>
 
 {% endblock %}
+
