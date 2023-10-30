@@ -7,6 +7,9 @@ p{
     font-family:ui-sans-serif;
 
 }
+button{
+    border-radius: 10px;
+}
 
 .name-page{
     font-size :30px;
@@ -41,6 +44,7 @@ p{
 
 .l-img{
     width: 400px;
+    margin: 5px 20px;
 }
 
 .listing-container {
@@ -77,15 +81,14 @@ p{
 }
 /*设定 custom-form */
 .custom-form {
-    margin: 20px;
-    padding: 10px;
+    margin: 5px 10px;
+    padding: 5px;
     border: 1px solid #ccc;
     background-color: #f5f5f5;
+    border-radius: 10px;
 }
 
-.custom-form label {
-    font-weight: bold;
-}
+
 
 .custom-form input[type="text"] {
     width: 100%;
@@ -102,6 +105,26 @@ p{
     font-weight: bold;
     font-size: large;
     background-color: red;
+}
+
+
+.para-title{
+    font-size: larger;
+    font-weight: bold;
+}
+.bid-comment-form{
+    line-height:1.5;
+}
+.bid-comment-form:hover{
+    background-color:#f5f5f5;
+}
+.bid-comment-form label{
+    font-family: sans-serif;
+    font-size: larger;
+    font-weight:bold;
+}
+.bid-comment-form button{
+    margin: 10px;
 }
 
 

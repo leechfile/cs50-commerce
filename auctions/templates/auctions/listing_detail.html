@@ -1,57 +1,61 @@
 {% extends 'auctions/layout.html' %}
 
 {% block body %}
-
+  <style>
+    .listing-item:hover{
+      background-color: #fff;
+    }
+  </style>
   <h2>{{ listing.title }}</h2>
   <p>{{ listing.description }}</p>
+  <div class="listing-container">
+    <div class="listing-item" style="max-width: max-content;">
     {% if listing.image_url %}
         <img class="l-img" src="{{ listing.image_url.url }}" alt="{{ listing.title }}">
     {% endif %}
-  <br>
-  <br>
-  <form action="{% url 'watch_list' %}" method="post">
+      <div class="bid-comment-form">
+        <p class="para-title">Place a Bid:</p>
+        <p>Current bid: ${{ listing.current_bid }}</p>
+
+        <form method="post" class="custom-form">
+          {% csrf_token %}
+          {{ bid_form.amount.label_tag }}
+          {{ bid_form.amount }}
+          <button type="submit" name="bid_button">Submit Bid</button>
+        </form>
+
+        <p class="para-title">Add a Comment:</p>
+        <div>
+        {{ comment_form.text.label_tag }}
+        </div>
+        <form method="post" class="custom-form">
+          {% csrf_token %}
+          {{ comment_form.text }}
+          <br>
+          <button type="submit" name="comment_button" style="padding: 3px 10px;">Submit Comment</button>
+        </form>
+        </div>
+    </div>
+  </div>
+  <form action="{% url 'watch_list' %}" style="text-align: center" method="post">
   {% csrf_token %}
     <input type="hidden" name="auction_id" value="{{listing.id}}">
     <button type="submit" class="add-watch-list">Add to watchlist</button>
   </form>
   <hr>
-  <h3>bid and comment</h3>
-  <form action="" class="custom-form" method="post">
-      {% csrf_token %}
-      {{ bid_form.as_p }}
-  </form>
-
-  <h2>Current bid: ${{ listing.current_bid }}</h2>
-
   <h3>Bid History:</h3>
   <ul>
     {% for bid in bids %}
       <li>{{ bid.bidder.username }} bid ${{ bid.amount }} at {{ bid.timestamp }}</li>
     {% endfor %}
   </ul>
-
   <hr>
-  <h3>Place a Bid:</h3>
-  <form method="post" class="custom-form">
-    {% csrf_token %}
-    {{ bid_form.as_p }}
-    <button type="submit" name="bid_button">Submit Bid</button>
-  </form>
-
-    <h3>Comments:</h3>
-    <ul>
-      {% for comment in comments %}
-        <li>{{ comment.commenter.username }}: {{ comment.text }}</li>
-      {% empty %}
-        <li>No comments yet.</li>
-      {% endfor %}
-    </ul>
-
-    <h3>Add a Comment:</h3>
-    <form method="post" class="custom-form">
-      {% csrf_token %}
-      {{ comment_form.as_p }}
-      <button type="submit" name="comment_button">Submit Comment</button>
-    </form>
-
+  <h3>Comments:</h3>
+  <ul>
+    {% for comment in comments %}
+      <li>{{ comment.commenter.username }}: {{ comment.text }}</li>
+    {% empty %}
+      <li>No comments yet.</li>
+    {% endfor %}
+  </ul>
 {% endblock %}
