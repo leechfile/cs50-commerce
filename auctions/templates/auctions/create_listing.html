@@ -2,9 +2,22 @@
 
 {% block body %}
     <h1>Create a New Listing</h1>
-    <form method="post" class="custom-form" enctype="multipart/form-data">
+    <form method="post" class="create-form" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_ul }}
+        {{ form.title.label_tag }}
+        {{ form.title }}
+
+        {{ form.description.label_tag }}
+        {{ form.description }}
+
+        {{ form.starting_bid.label_tag }}
+        {{ form.starting_bid }}
+
+        {{ form.image_url.label_tag }}
+        {{ form.image_url }}
+
+        {{ form.category.label_tag }}
+        {{ form.category }}
         <button type="submit">Create Listing</button>
     </form>
 {% endblock %}
