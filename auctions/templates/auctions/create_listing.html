@@ -2,22 +2,24 @@
 
 {% block body %}
     <h1>Create a New Listing</h1>
-    <form method="post" class="create-form" enctype="multipart/form-data">
+    <form method="post" class="bid-comment-form enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.title.label_tag }}
         {{ form.title }}
-
+        <br>
         {{ form.description.label_tag }}
+        <br>
         {{ form.description }}
-
+        <br>
         {{ form.starting_bid.label_tag }}
         {{ form.starting_bid }}
-
+        <br>
         {{ form.image_url.label_tag }}
         {{ form.image_url }}
-
+        <br>
         {{ form.category.label_tag }}
         {{ form.category }}
+        <br>
         <button type="submit">Create Listing</button>
     </form>
 {% endblock %}
